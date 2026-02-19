@@ -77,18 +77,24 @@ export default function Dashboard() {
   };
 
   // 手動保存の処理（AIカテゴリ判定付き）
-  const handleSave = async () => {
+const handleSave = async () => {
     if (!newDescription || !newAmount || !session) return;
     setIsSaving(true);
 
     try {
-      // 1. ChatGPT APIを叩いてカテゴリを推測
+      console.log("AIに問い合わせ開始...");
       const res = await fetch("/api/guess-category", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ description: newDescription }),
       });
+      
+      if (!res.ok) {
+        throw new Error("APIリクエスト失敗");
+      }
+
       const { category } = await res.json();
+      console.log("AIが判定したカテゴリ:", category);
 
       // 2. Supabaseに保存
       const { error } = await supabase.from("transactions").insert([
