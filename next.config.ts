@@ -14,13 +14,9 @@ const withPWA = withPWAInit({
 });
 
 const nextConfig: NextConfig = {
-  // Turbopackの代わりにWebpackを明示的に使用するように設定
-  webpack: (config) => {
-    return config;
-  },
-  // または、エラーメッセージの指示通りに空のオブジェクトを渡す
+  // Turbopackのエラーを解消するための設定
   experimental: {
-    turbopack: {},
+    turbopack: {}, 
   },
 };
 
