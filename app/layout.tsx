@@ -1,25 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// Next.js 14 標準の Inter フォントを使用
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "JCB家計簿",
-  description: "サクサク家計簿アプリ",
-  manifest: "/manifest.json",
-};
-
-export const viewport = {
-  themeColor: "#000000",
+  title: "My Kakeibo",
+  description: "JCB自動取り込み家計簿",
 };
 
 export default function RootLayout({
@@ -28,10 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="ja">
+      <body className={inter.className}>
         {children}
       </body>
     </html>
