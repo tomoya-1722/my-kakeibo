@@ -14,10 +14,14 @@ const withPWA = withPWAInit({
 });
 
 const nextConfig: NextConfig = {
-  // Turbopackのエラーを解消するための設定
-  experimental: {
-    turbopack: {}, 
+  // Webpackを強制的に使用するように宣言
+  webpack: (config) => {
+    return config;
   },
+  // 一部の環境で必要になる「Turbopack無効化」の空フラグ
+  experimental: {
+    turbopack: undefined, 
+  } as any,
 };
 
 export default withPWA(nextConfig);
